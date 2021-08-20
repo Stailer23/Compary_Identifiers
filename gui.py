@@ -77,4 +77,7 @@ e4.pack()
 b5 = Button(root, text = 'Обзор..',width = 9, command = selectFolderPath)
 b5.place(x=380, y=100)
 
+copirate = Label(root, text = 'by Nikolaev', fg = 'grey')
+copirate.place(x=500, y = 180)
+
 root.mainloop()
