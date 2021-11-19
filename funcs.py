@@ -11,7 +11,15 @@ def operator_base(line:list, mnc:int, dict:dict):
         return
     return dict
 
-def serch(line, mnc, dict:dict, sheet,reply):
+def base_coord(line:list, dict_cooord:dict):
+        if line[13] not in dict_cooord.keys():
+            dict_cooord[line[13]] = set()
+            dict_cooord[line[13]].add(line[1])
+            dict_cooord[line[13]].add(line[2])
+        else: return
+        return dict_cooord
+
+def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply):
         if float(line[4]) >0 and float(line[4]) <0.5:
             if int(line[12]) == mnc:
                 if line[0] in reply:
@@ -20,6 +28,13 @@ def serch(line, mnc, dict:dict, sheet,reply):
                 if line[15] in dict.keys(): #если есть номер канал в ключах, то поискать ECI в ключе.
                     if line[14] in dict.get(line[15]): #Если в этом ключе найден ECI, то выйти
                         reply.append(line[0])
+                        if serch_coord(line, dict_coord, line[14]) == True:
+                            return
+                        else:
+                            err3 = (f'Далековато, в базе: ')
+                            line.insert(0, err3)
+                            sheet.append(line)
+                            reply.append(line[0])
                         return
                     for key in dict.keys(): #Поискать по остальным ключам
                         if line[14] in dict.get(key): # Если нашлось
@@ -44,3 +59,17 @@ def serch(line, mnc, dict:dict, sheet,reply):
             else: return
         else: return
 
+def serch_coord(line, dict, key):
+    a = float(line[2])
+    b = float(line[1])
+    c = []
+    for i in (dict[key]):
+        c.append(i)
+    d,e = float(c[0]),float(c[1])
+    if d<e:
+        d,e = e,d
+    if (abs(a - float(d)) > 0.005) or (abs(b - float(e)) > 0.005):
+        print(a,b,d,e,(abs(a - float(d))),(abs(b - float(e))))
+        return False
+    else:
+        return True
