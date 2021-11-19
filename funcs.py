@@ -31,7 +31,7 @@ def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply):
                         if serch_coord(line, dict_coord, line[14]) == True:
                             return
                         else:
-                            err3 = (f'Далековато, в базе: ')
+                            err3 = (f'Далековато')
                             line.insert(0, err3)
                             sheet.append(line)
                             reply.append(line[0])
