@@ -1,13 +1,10 @@
 import funcs, openpyxl
+import datetime
 t2_base = {}
 mts_base = {}
 megafon_base = {}
 beeline_base = {}
 coord = {}
-# mts_coord = {}
-# megafon_coord = {}
-# beeline_coord = {}
-
 reply = []
 wb = openpyxl.Workbook()
 wb.create_sheet(title='Нарушения', index=0)
@@ -23,15 +20,10 @@ def open_base(filename):
             cnt+=1
             line_base = line_base.split(';')
             funcs.operator_base(line_base, 1, mts_base)
-            # funcs.base_coord(line_base, 1, mts_coord)
             funcs.operator_base(line_base, 2, megafon_base)
-            # funcs.base_coord(line_base, 2, megafon_coord)
             funcs.operator_base(line_base, 11, megafon_base)
-            # funcs.base_coord(line_base, 11, megafon_coord)
             funcs.operator_base(line_base, 99, mts_base) #!!!!!!!!!!
-            # funcs.base_coord(line_base, 99, mts_coord)  #!!!!!!!!!!
             funcs.operator_base(line_base, 20, t2_base)
-            # funcs.base_coord(line_base, 20, t2_coord)
             funcs.operator_base(line_base, 0, t2_base)
             funcs.base_coord(line_base, coord)
     print(coord, 'cnt=', cnt)
@@ -47,7 +39,7 @@ def open_mes(filename):
             funcs.serch(line_mes, 0, t2_base, coord, sheet,reply)
 
 def save(direct):
-    wb.save(f'{direct}/Нарушения.xlsx')
+    wb.save(f'{direct}/Нарушения LTE.xlsx')
 
 
 

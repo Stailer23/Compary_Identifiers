@@ -32,6 +32,9 @@ def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply):
                             return
                         else:
                             err3 = (f'Далековато')
+                            line[1] = decdeg2dms(float(line[1]))  # Преобразование координат
+                            line[2] = decdeg2dms(float(line[2]))  # Преобразование координат
+                            line[1], line[2] = line[2], line[1]
                             line.insert(0, err3)
                             sheet.append(line)
                             reply.append(line[0])
@@ -39,6 +42,9 @@ def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply):
                     for key in dict.keys(): #Поискать по остальным ключам
                         if line[14] in dict.get(key): # Если нашлось
                             err = (f'Другой канал: {line[15]}, должен быть: {key}')
+                            line[1] = decdeg2dms(float(line[1]))  # Преобразование координат
+                            line[2] = decdeg2dms(float(line[2]))  # Преобразование координат
+                            line[1], line[2] = line[2], line[1]
                             line.insert(0, err)
                             sheet.append(line)
                             reply.append(line[0])
@@ -46,12 +52,18 @@ def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply):
                     if line[0] in reply:
                         return
                     err1 = (f'Нет такого ECI {line[14]}')
+                    line[1] = decdeg2dms(float(line[1]))  # Преобразование координат
+                    line[2] = decdeg2dms(float(line[2]))  # Преобразование координат
+                    line[1], line[2] = line[2], line[1]
                     line.insert(0, err1)
                     sheet.append(line)
                     reply.append(line[0])
                     return
                 else:
                     err2 = (f'Нет такого канала {line[15]}')
+                    line[1] = decdeg2dms(float(line[1]))  # Преобразование координат
+                    line[2] = decdeg2dms(float(line[2]))  # Преобразование координат
+                    line[1], line[2] = line[2], line[1]
                     line.insert(0, err2)
                     sheet.append(line)
                     reply.append(line[0])
@@ -73,3 +85,17 @@ def serch_coord(line, dict, key):
         return False
     else:
         return True
+
+def decdeg2dms(dd): #Преобразование координат
+    negative = dd < 0
+    dd = abs(dd)
+    minutes,seconds = divmod(dd*3600,60)
+    degrees,minutes = divmod(minutes,60)
+    if negative:
+        if degrees > 0:
+            degrees = -degrees
+        elif minutes > 0:
+            minutes = -minutes
+        else:
+            seconds = -seconds
+    return f'{int(degrees)} {int(minutes)} {int(seconds)}'

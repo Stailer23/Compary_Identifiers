@@ -1,5 +1,7 @@
 import tkinter.filedialog
 from tkinter import *
+from tkinter import ttk
+import umts_main
 import main
 filename1 = ''
 filename2 = ''
@@ -16,7 +18,14 @@ def openfile1():
     e1.insert(0, filename1)
 
 def zap_bs():
-    main.open_base(filename1)
+    if comboExample.get() == 'UMTS':
+        umts_main.open_base(filename1)
+        comboExample['state'] = 'disabled'
+    elif comboExample.get() == 'LTE':
+        main.open_base(filename1)
+        comboExample['state'] = 'disabled'
+    elif comboExample.get() == 'GSM':
+        pass
 
 def openfile2():
     '''
@@ -41,14 +50,23 @@ def selectFolderPath():
     e4.insert(0, select_folder)
 
 def run():
-    main.open_mes(filename2)
-    main.save(select_folder)
-    l1 = Label(root, text = "Готово")
-    l1.place(x=10, y = 180)
+    if comboExample.get() == 'LTE':
+        main.open_mes(filename2)
+        main.save(select_folder)
+        l1 = Label(root, text = "Готово")
+        l1.place(x=10, y = 180)
+    elif comboExample.get() == 'UMTS':
+        umts_main.open_mes(filename2)
+        umts_main.save(select_folder)
+        l1 = Label(root, text = "Готово")
+        l1.place(x=10, y = 180)
+    elif comboExample.get() == 'GSM':  # Дописать когда будет GSM
+        print('3')
+    else: print ('4')
 
 
 root = Tk()
-root.title('Сид парсер здорового человека v1.3')
+root.title('Сид парсер здорового человека v1.4')
 root.geometry('570x200+400+100')
 root.resizable(False, False)
 fl = LabelFrame(root,text = 'Выберите файл с базой (.txt)')
@@ -76,6 +94,11 @@ e4 = Entry(fl3,width = 60)
 e4.pack()
 b5 = Button(root, text = 'Обзор..',width = 9, command = selectFolderPath)
 b5.place(x=380, y=100)
+
+comboExample = ttk.Combobox(root, values=['GSM', 'UMTS', 'LTE'], width = 5)
+comboExample.current(2)
+comboExample['state'] = 'readonly'
+comboExample.place(x=480, y=50)
 
 copirate = Label(root, text = 'by Nikolaev', fg = 'grey')
 copirate.place(x=500, y = 180)
