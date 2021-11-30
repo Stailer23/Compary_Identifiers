@@ -50,13 +50,14 @@ def selectFolderPath():
     e4.insert(0, select_folder)
 
 def run():
+    delta = e5.get()
     if comboExample.get() == 'LTE':
-        main.open_mes(filename2)
+        main.open_mes(filename2,delta)
         main.save(select_folder)
         l1 = Label(root, text = "Готово")
         l1.place(x=10, y = 180)
     elif comboExample.get() == 'UMTS':
-        umts_main.open_mes(filename2)
+        umts_main.open_mes(filename2,e5)
         umts_main.save(select_folder)
         l1 = Label(root, text = "Готово")
         l1.place(x=10, y = 180)
@@ -99,6 +100,13 @@ comboExample = ttk.Combobox(root, values=['GSM', 'UMTS', 'LTE'], width = 5)
 comboExample.current(2)
 comboExample['state'] = 'readonly'
 comboExample.place(x=480, y=50)
+
+l4 = Label(root, text = 'Макс.Дельта:')
+l4.place(x=470, y=80)
+e5 = Entry(root, width = 8)
+e5.insert(0, '0.5')
+e5.place(x=480, y=100)
+
 
 copirate = Label(root, text = 'by Nikolaev', fg = 'grey')
 copirate.place(x=500, y = 180)

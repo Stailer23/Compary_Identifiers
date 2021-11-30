@@ -19,8 +19,8 @@ def base_coord(line:list, dict_cooord:dict):
         else: return
         return dict_cooord
 
-def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply):
-        if float(line[4]) >0 and float(line[4]) <0.5:
+def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply,delta):
+        if float(line[4]) >0 and float(line[4]) < float(delta):
             if int(line[12]) == mnc:
                 if line[0] in reply:
                     return

@@ -21,8 +21,8 @@ def base_coord_umts(line: list, dict_cooord: dict):
         return
     return dict_cooord
 
-def serch(line, mnc, channel, dict: dict, dict_coord: dict, sheet, reply):
-    if float(line[4]) > 0 and float(line[4]) < 0.5:
+def serch(line, mnc, channel, dict: dict, dict_coord: dict, sheet, reply, delta):
+    if float(line[4]) > 0 and float(line[4]) < float(delta):
         if int(line[12]) == mnc and int(line[15]) == channel:
             if line[0] in reply:
                 return

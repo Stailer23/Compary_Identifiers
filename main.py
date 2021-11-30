@@ -27,16 +27,17 @@ def open_base(filename):
             funcs.operator_base(line_base, 0, t2_base)
             funcs.base_coord(line_base, coord)
     print(coord, 'cnt=', cnt)
-def open_mes(filename):
+def open_mes(filename, delta):
+    delta1 = delta.replace(',','.')
     with open(filename) as mes:
         for line_mes in mes:
             line_mes = line_mes.split(';')
-            funcs.serch(line_mes, 11, megafon_base, coord, sheet,reply)
-            funcs.serch(line_mes, 2, megafon_base, coord, sheet,reply)
-            funcs.serch(line_mes, 1, mts_base,coord, sheet,reply)
-            funcs.serch(line_mes, 99, mts_base, coord, sheet,reply)
-            funcs.serch(line_mes, 20, t2_base, coord, sheet,reply)
-            funcs.serch(line_mes, 0, t2_base, coord, sheet,reply)
+            funcs.serch(line_mes, 11, megafon_base, coord, sheet,reply, delta1)
+            funcs.serch(line_mes, 2, megafon_base, coord, sheet,reply,delta1)
+            funcs.serch(line_mes, 1, mts_base,coord, sheet,reply,delta1)
+            funcs.serch(line_mes, 99, mts_base, coord, sheet,reply,delta1)
+            funcs.serch(line_mes, 20, t2_base, coord, sheet,reply,delta1)
+            funcs.serch(line_mes, 0, t2_base, coord, sheet,reply,delta1)
 
 def save(direct):
     wb.save(f'{direct}/Нарушения LTE.xlsx')
