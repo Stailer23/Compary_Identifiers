@@ -1,5 +1,6 @@
-import funcs, openpyxl
-import datetime
+import funcs
+import openpyxl
+
 t2_base = {}
 mts_base = {}
 megafon_base = {}

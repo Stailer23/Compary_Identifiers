@@ -1,4 +1,6 @@
-import funcs_umts, openpyxl, datetime
+import funcs_umts
+import openpyxl
+
 t2_base_umts1 = {}
 t2_base_umts2 = {}
 t2_base_umts3 = {}
