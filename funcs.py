@@ -28,10 +28,12 @@ def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply,delta, delta_coord1
                 if line[15] in dict.keys(): #если есть номер канал в ключах, то поискать ECI в ключе.
                     if line[14] in dict.get(line[15]): #Если в этом ключе найден ECI, то выйти
                         reply.append(line[0])
-                        if serch_coord(line, dict_coord, line[14],delta_coord1, delta_coord2) == True:
+                        ser_cor = serch_coord(line, dict_coord, line[14],delta_coord1, delta_coord2)
+                        if ser_cor == True:
                             return
-                        else:
-                            err3 = (f'Далековато')
+                        elif False in ser_cor:
+                            print(ser_cor)
+                            err3 = (f'Далековато. В базе: {ser_cor[1]}, {ser_cor[2]}')
                             line[1] = decdeg2dms(float(line[1]))  # Преобразование координат
                             line[2] = decdeg2dms(float(line[2]))  # Преобразование координат
                             line[1], line[2] = line[2], line[1]
@@ -82,7 +84,9 @@ def serch_coord(line, dict, key, delta_coord1, delta_coord2):
         d,e = e,d
     if (abs(a - float(d)) > float(delta_coord1)) or (abs(b - float(e)) > float(delta_coord2)):
         # print(a,b,d,e,(abs(a - float(d))),(abs(b - float(e))))
-        return False
+        preobD = decdeg2dms(d)
+        preobE = decdeg2dms(e)
+        return [False, preobD, preobE]
     else:
         return True
 
@@ -98,7 +102,7 @@ def decdeg2dms(dd): #Преобразование координат
             minutes = -minutes
         else:
             seconds = -seconds
-    return f'{int(degrees)} {int(minutes)} {int(seconds)}'
+    return f'{int(degrees):02} {int(minutes):02} {int(seconds):02}'
 
 def writeBS(dict, name):
     with open (name, 'w') as dbL:
