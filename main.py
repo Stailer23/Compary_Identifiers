@@ -14,10 +14,9 @@ title = ['Вид нарушения', 'Название','Долгота','Ши�
          'MNC','TAC','ECI','Канал','PCI']
 sheet.append(title)
 def open_base(filename):
-    cnt = 0
     with open(filename, 'r') as base:
          for line_base in base:
-            cnt+=1
+
             line_base = line_base.split(';')
             funcs.operator_base(line_base, 1, mts_base)
             funcs.operator_base(line_base, 2, megafon_base)
@@ -26,9 +25,18 @@ def open_base(filename):
             funcs.operator_base(line_base, 20, t2_base)
             funcs.operator_base(line_base, 0, t2_base)
             funcs.base_coord(line_base, coord)
-    print(coord, 'cnt=', cnt)
+    funcs.writeBS(t2_base,'dbt2L.txt')
+    funcs.writeBS(mts_base,'dbmtsL.txt')
+    funcs.writeBS(megafon_base,'dbmfL.txt')
+    funcs.writeBS(coord, 'dbcoord.txt')
+    funcs.readBS('dbt2L.txt')
+
 def open_mes(filename, delta):
     delta1 = delta.replace(',','.')
+    megafon_base = funcs.readBS('dbmfL.txt')
+    mts_base = funcs.readBS('dbmtsL.txt')
+    t2_base = funcs.readBS('dbt2L.txt')
+    coord = funcs.readBS('dbcoordL.txt')
     with open(filename) as mes:
         for line_mes in mes:
             line_mes = line_mes.split(';')

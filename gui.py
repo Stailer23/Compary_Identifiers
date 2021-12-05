@@ -57,7 +57,7 @@ def run():
         l1 = Label(root, text = "Готово")
         l1.place(x=10, y = 180)
     elif comboExample.get() == 'UMTS':
-        umts_main.open_mes(filename2,e5)
+        umts_main.open_mes(filename2,delta)
         umts_main.save(select_folder)
         l1 = Label(root, text = "Готово")
         l1.place(x=10, y = 180)

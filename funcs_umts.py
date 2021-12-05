@@ -26,7 +26,7 @@ def serch(line, mnc, channel, dict: dict, dict_coord: dict, sheet, reply, delta)
         if int(line[12]) == mnc and int(line[15]) == channel:
             if line[0] in reply:
                 return
-
+            laclen(line)
             if line[13] in dict.keys():  # если есть LAC в ключах, то поискать CI в ключе.
                 if line[14] in dict.get(line[13]):  # Если в этом ключе найден CI, то выйти
                     reply.append(line[0])
@@ -103,3 +103,28 @@ def decdeg2dms(dd): #Преобразование координат
         else:
             seconds = -seconds
     return f'{int(degrees)} {int(minutes)} {int(seconds)}'
+
+def writeBS(dict, name):
+    with open (name, 'w') as dbL:
+        for key,val in dict.items():
+            dbL.write(f'{key}:{val}\n')
+
+def readBS(file):
+    dict={}
+    with open(file, 'r') as readdb:
+        for i in readdb.readlines():
+            key,val = i.strip().split(':')
+            val = val.replace('{', '').replace('}', '').replace("'", '').replace(' ', '')
+            val = val.split(',')
+            val = set(val)
+            print(val)
+            dict[key] = val
+    return dict
+
+def laclen(line):
+    if len(line[13]) == 5:
+        return
+    else:
+        line[13] = f'0{line[13]}'
+        laclen(line)
+    return line

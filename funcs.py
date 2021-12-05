@@ -99,3 +99,20 @@ def decdeg2dms(dd): #Преобразование координат
         else:
             seconds = -seconds
     return f'{int(degrees)} {int(minutes)} {int(seconds)}'
+
+def writeBS(dict, name):
+    with open (name, 'w') as dbL:
+        for key,val in dict.items():
+            dbL.write(f'{key}:{val}\n')
+
+def readBS(file):
+    dict={}
+    with open(file, 'r') as readdbL:
+        for i in readdbL.readlines():
+            key,val = i.strip().split(':')
+            val = val.replace('{', '').replace('}', '').replace("'", '').replace(' ', '')
+            val = val.split(',')
+            val = set(val)
+            print(val)
+            dict[key] = val
+    return dict
