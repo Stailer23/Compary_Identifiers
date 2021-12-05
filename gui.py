@@ -1,6 +1,7 @@
 import tkinter.filedialog
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox as mb
 import umts_main
 import main
 filename1 = ''
@@ -26,6 +27,8 @@ def zap_bs():
         comboExample['state'] = 'disabled'
     elif comboExample.get() == 'GSM':
         pass
+    elif comboExample.get() == '---':
+        mb.showerror('Ошибочка', 'Не выбран стандарт')
 
 def openfile2():
     '''
@@ -65,11 +68,13 @@ def run():
         l1.place(x=10, y = 280)
     elif comboExample.get() == 'GSM':  # Дописать когда будет GSM
         print('3')
+    elif comboExample.get() == '---':
+        mb.showerror('Ошибочка', 'Не выбран стандарт')
     else: print ('4')
 
 
 root = Tk()
-root.title('Сид парсер здорового человека v1.5')
+root.title('Сид парсер здорового человека v1.6')
 root.geometry('570x300+400+100')
 root.resizable(False, False)
 fl = LabelFrame(root,text = 'Выберите файл с базой (.txt)')
@@ -103,8 +108,8 @@ fl4.place(x=10, y=5)
 l1 = Label(fl4, text='Стандарт ОПСОСа:')
 l1.grid(row=0, column=0)
 
-comboExample = ttk.Combobox(fl4, values=['GSM', 'UMTS', 'LTE'], width=5)
-comboExample.current(2)
+comboExample = ttk.Combobox(fl4, values=['---','GSM', 'UMTS', 'LTE'], width=5)
+comboExample.current(0)
 comboExample['state'] = 'readonly'
 comboExample.grid(row=0, column=1, padx=5, pady=5)
 

@@ -35,7 +35,6 @@ def serch(line, mnc, channel, dict: dict, dict_coord: dict, sheet, reply, delta,
                     if ser_cor == True:
                         return
                     elif False in ser_cor:
-                        print(ser_cor)
                         err3 = (f'Далековато. В базе: {ser_cor[1]}, {ser_cor[2]}')
                         line[1] = decdeg2dms(float(line[1]))  # Преобразование координат
                         line[2] = decdeg2dms(float(line[2]))  # Преобразование координат
