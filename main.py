@@ -31,7 +31,7 @@ def open_base(filename):
     funcs.writeBS(coord, 'dbcoordL.txt')
     funcs.readBS('dbt2L.txt')
 
-def open_mes(filename, delta):
+def open_mes(filename, delta,delta_coord1, delta_coord2):
     delta1 = delta.replace(',','.')
     megafon_base = funcs.readBS('dbmfL.txt')
     mts_base = funcs.readBS('dbmtsL.txt')
@@ -40,12 +40,12 @@ def open_mes(filename, delta):
     with open(filename) as mes:
         for line_mes in mes:
             line_mes = line_mes.split(';')
-            funcs.serch(line_mes, 11, megafon_base, coord, sheet,reply, delta1)
-            funcs.serch(line_mes, 2, megafon_base, coord, sheet,reply,delta1)
-            funcs.serch(line_mes, 1, mts_base,coord, sheet,reply,delta1)
-            funcs.serch(line_mes, 99, mts_base, coord, sheet,reply,delta1)
-            funcs.serch(line_mes, 20, t2_base, coord, sheet,reply,delta1)
-            funcs.serch(line_mes, 0, t2_base, coord, sheet,reply,delta1)
+            funcs.serch(line_mes, 11, megafon_base, coord, sheet,reply, delta1,delta_coord1, delta_coord2)
+            funcs.serch(line_mes, 2, megafon_base, coord, sheet,reply,delta1,delta_coord1, delta_coord2)
+            funcs.serch(line_mes, 1, mts_base,coord, sheet,reply,delta1,delta_coord1, delta_coord2)
+            funcs.serch(line_mes, 99, mts_base, coord, sheet,reply,delta1,delta_coord1, delta_coord2)
+            funcs.serch(line_mes, 20, t2_base, coord, sheet,reply,delta1,delta_coord1, delta_coord2)
+            funcs.serch(line_mes, 0, t2_base, coord, sheet,reply,delta1,delta_coord1, delta_coord2)
 
 def save(direct):
     time = str(datetime.datetime.now()).replace(':', '-')

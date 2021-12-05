@@ -19,7 +19,7 @@ def base_coord(line:list, dict_cooord:dict):
         else: return
         return dict_cooord
 
-def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply,delta):
+def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply,delta, delta_coord1, delta_coord2):
         if float(line[4]) >0 and float(line[4]) < float(delta):
             if int(line[12]) == mnc:
                 if line[0] in reply:
@@ -28,7 +28,7 @@ def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply,delta):
                 if line[15] in dict.keys(): #если есть номер канал в ключах, то поискать ECI в ключе.
                     if line[14] in dict.get(line[15]): #Если в этом ключе найден ECI, то выйти
                         reply.append(line[0])
-                        if serch_coord(line, dict_coord, line[14]) == True:
+                        if serch_coord(line, dict_coord, line[14],delta_coord1, delta_coord2) == True:
                             return
                         else:
                             err3 = (f'Далековато')
@@ -71,7 +71,7 @@ def serch(line, mnc, dict:dict, dict_coord:dict, sheet,reply,delta):
             else: return
         else: return
 
-def serch_coord(line, dict, key):
+def serch_coord(line, dict, key, delta_coord1, delta_coord2):
     a = float(line[2])
     b = float(line[1])
     c = []
@@ -80,8 +80,8 @@ def serch_coord(line, dict, key):
     d,e = float(c[0]),float(c[1])
     if d<e:
         d,e = e,d
-    if (abs(a - float(d)) > 0.005) or (abs(b - float(e)) > 0.005):
-        print(a,b,d,e,(abs(a - float(d))),(abs(b - float(e))))
+    if (abs(a - float(d)) > float(delta_coord1)) or (abs(b - float(e)) > float(delta_coord2)):
+        # print(a,b,d,e,(abs(a - float(d))),(abs(b - float(e))))
         return False
     else:
         return True
@@ -113,6 +113,6 @@ def readBS(file):
             val = val.replace('{', '').replace('}', '').replace("'", '').replace(' ', '')
             val = val.split(',')
             val = set(val)
-            print(val)
+            # print(val)
             dict[key] = val
     return dict
