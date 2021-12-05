@@ -55,7 +55,7 @@ def open_base(filename):
     funcs_umts.writeBS(t2_base_umts1, 'dbt2U3.txt')
     funcs_umts.writeBS(coord_umts, 'dbcoordU.txt')
 
-def open_mes(filename, delta):
+def open_mes(filename, delta, delta_coord1, delta_coord2):
     delta1 = delta.replace(',','.')
     mts_base_umts1 = funcs_umts.readBS('dbmtsU1.txt')
     mts_base_umts2 = funcs_umts.readBS('dbmtsU2.txt')
@@ -73,18 +73,18 @@ def open_mes(filename, delta):
     with open(filename) as mes:
         for line_mes in mes:
             line_mes = line_mes.split(';')
-            funcs_umts.serch(line_mes, 2,10687, megafon_base_umts1, coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 2, 10662, megafon_base_umts2, coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 2,10638, megafon_base_umts3, coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 1,10762, mts_base_umts1,coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 1,10737, mts_base_umts2,coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 1,10713, mts_base_umts3,coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 99,10836, beeline_base_umts1, coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 99,10813, beeline_base_umts2, coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 99,10788, beeline_base_umts3, coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 20,10612, t2_base_umts1, coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 20,10587, t2_base_umts2, coord_umts, sheet,reply_umts, delta1)
-            funcs_umts.serch(line_mes, 20,10563, t2_base_umts3, coord_umts, sheet,reply_umts, delta1)
+            funcs_umts.serch(line_mes, 2,10687, megafon_base_umts1, coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 2, 10662, megafon_base_umts2, coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 2,10638, megafon_base_umts3, coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 1,10762, mts_base_umts1,coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 1,10737, mts_base_umts2,coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 1,10713, mts_base_umts3,coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 99,10836, beeline_base_umts1, coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 99,10813, beeline_base_umts2, coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 99,10788, beeline_base_umts3, coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 20,10612, t2_base_umts1, coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 20,10587, t2_base_umts2, coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
+            funcs_umts.serch(line_mes, 20,10563, t2_base_umts3, coord_umts, sheet,reply_umts, delta1, delta_coord1, delta_coord2)
 
 
 def save(direct):

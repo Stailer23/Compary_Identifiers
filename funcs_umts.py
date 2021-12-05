@@ -20,7 +20,7 @@ def base_coord_umts(line: list, dict_cooord: dict):
         return
     return dict_cooord
 
-def serch(line, mnc, channel, dict: dict, dict_coord: dict, sheet, reply, delta):
+def serch(line, mnc, channel, dict: dict, dict_coord: dict, sheet, reply, delta, delta_coord1, delta_coord2):
     if float(line[4]) > 0 and float(line[4]) < float(delta):
         if int(line[12]) == mnc and int(line[15]) == channel:
             if line[0] in reply:
@@ -31,7 +31,7 @@ def serch(line, mnc, channel, dict: dict, dict_coord: dict, sheet, reply, delta)
             if line[13] in dict.keys():  # если есть LAC в ключах, то поискать CI в ключе.
                 if line[14] in dict.get(line[13]):  # Если в этом ключе найден CI, то выйти
                     reply.append(line[0])
-                    if serch_coord(line, dict_coord, line[14]) == True:
+                    if serch_coord(line, dict_coord, line[14], delta_coord1, delta_coord2) == True:
                         return
                     else:
                         err3 = (f'Далековато')
@@ -76,7 +76,7 @@ def serch(line, mnc, channel, dict: dict, dict_coord: dict, sheet, reply, delta)
     else:
         return
 
-def serch_coord(line, dict, key):
+def serch_coord(line, dict, key, delta_coord1, delta_coord2):
     a = float(line[2])
     b = float(line[1])
     c = []
@@ -85,7 +85,7 @@ def serch_coord(line, dict, key):
     d,e = float(c[0]),float(c[1])
     if d<e:
         d,e = e,d
-    if (abs(a - float(d)) > 0.005) or (abs(b - float(e)) > 0.005):
+    if (abs(a - float(d)) > float(delta_coord1)) or (abs(b - float(e)) > float(delta_coord2)):
         # print(a,b,d,e,(abs(a - float(d))),(abs(b - float(e))))
         return False
     else:

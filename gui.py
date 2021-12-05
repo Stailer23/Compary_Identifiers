@@ -59,7 +59,7 @@ def run():
         l1 = Label(root, text = "Готово")
         l1.place(x=10, y = 280)
     elif comboExample.get() == 'UMTS':
-        umts_main.open_mes(filename2,delta)
+        umts_main.open_mes(filename2,delta, delta_coord1, delta_coord2)
         umts_main.save(select_folder)
         l1 = Label(root, text = "Готово")
         l1.place(x=10, y = 280)
@@ -69,7 +69,7 @@ def run():
 
 
 root = Tk()
-root.title('Сид парсер здорового человека v1.4')
+root.title('Сид парсер здорового человека v1.5')
 root.geometry('570x300+400+100')
 root.resizable(False, False)
 fl = LabelFrame(root,text = 'Выберите файл с базой (.txt)')
@@ -100,7 +100,7 @@ b5.place(x=380, y=200)
 
 fl4 = LabelFrame(root,text='Настройки', width=100)
 fl4.place(x=10, y=5)
-l1 = Label(fl4, text='Стандарт:')
+l1 = Label(fl4, text='Стандарт ОПСОСа:')
 l1.grid(row=0, column=0)
 
 comboExample = ttk.Combobox(fl4, values=['GSM', 'UMTS', 'LTE'], width=5)
@@ -114,13 +114,13 @@ e5 = Entry(fl4, width=8)
 e5.insert(0, '0.5')
 e5.grid(row=0, column=3, padx=5, pady=5)
 
-l5 = Label(fl4, text='Дельта широты')
+l5 = Label(fl4, text='Дельта широты(град.)')
 l5.grid(row=1, column=0)
 e6 = Entry(fl4, width=8)
 e6.insert(0, '0.005')
-e6.grid(row=1, column=1)
+e6.grid(row=1, column=1, pady=5)
 
-l6 = Label(fl4, text='Дельта долготы')
+l6 = Label(fl4, text='Дельта долготы(град.)')
 l6.grid(row=1, column=2)
 e7 = Entry(fl4, width=8)
 e7.insert(0, '0.005')
