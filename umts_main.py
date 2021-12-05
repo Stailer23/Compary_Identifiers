@@ -88,5 +88,6 @@ def open_mes(filename, delta):
 
 
 def save(direct):
-    wb.save(f'{direct}/Нарушения UMTS.xlsx')
+    time = str(datetime.datetime.now()).replace(':', '-')
+    wb.save(f'{direct}/Нарушения UMTS {time}.xlsx')
 

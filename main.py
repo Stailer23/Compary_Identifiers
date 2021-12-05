@@ -28,7 +28,7 @@ def open_base(filename):
     funcs.writeBS(t2_base,'dbt2L.txt')
     funcs.writeBS(mts_base,'dbmtsL.txt')
     funcs.writeBS(megafon_base,'dbmfL.txt')
-    funcs.writeBS(coord, 'dbcoord.txt')
+    funcs.writeBS(coord, 'dbcoordL.txt')
     funcs.readBS('dbt2L.txt')
 
 def open_mes(filename, delta):
@@ -48,7 +48,8 @@ def open_mes(filename, delta):
             funcs.serch(line_mes, 0, t2_base, coord, sheet,reply,delta1)
 
 def save(direct):
-    wb.save(f'{direct}/Нарушения LTE.xlsx')
+    time = str(datetime.datetime.now()).replace(':', '-')
+    wb.save(f'{direct}/Нарушения LTE {time}.xlsx')
 
 
 

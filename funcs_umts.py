@@ -6,7 +6,6 @@ def operator_base_umts(line:list, mnc:int, channel:int, dict:dict):
         else:
             for key in dict.keys():
                 if key == line[13]:
-                    # dict[line[11]][line[13]].setdefault(line[13], set()).add(line[12])
                     dict[line[13]].add(line[12])
     else:
         return
@@ -25,6 +24,8 @@ def serch(line, mnc, channel, dict: dict, dict_coord: dict, sheet, reply, delta)
     if float(line[4]) > 0 and float(line[4]) < float(delta):
         if int(line[12]) == mnc and int(line[15]) == channel:
             if line[0] in reply:
+                return
+            if len(line[13]) < 1:
                 return
             laclen(line)
             if line[13] in dict.keys():  # если есть LAC в ключах, то поискать CI в ключе.
@@ -85,7 +86,7 @@ def serch_coord(line, dict, key):
     if d<e:
         d,e = e,d
     if (abs(a - float(d)) > 0.005) or (abs(b - float(e)) > 0.005):
-        print(a,b,d,e,(abs(a - float(d))),(abs(b - float(e))))
+        # print(a,b,d,e,(abs(a - float(d))),(abs(b - float(e))))
         return False
     else:
         return True
@@ -117,7 +118,6 @@ def readBS(file):
             val = val.replace('{', '').replace('}', '').replace("'", '').replace(' ', '')
             val = val.split(',')
             val = set(val)
-            print(val)
             dict[key] = val
     return dict
 
