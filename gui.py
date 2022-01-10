@@ -74,7 +74,7 @@ def run():
 
 
 root = Tk()
-root.title('Сид парсер здорового человека v1.6')
+root.title('Сид парсер здорового человека v1.7')
 root.geometry('570x300+400+100')
 root.resizable(False, False)
 fl = LabelFrame(root,text = 'Выберите файл с базой (.txt)')
